@@ -215,7 +215,7 @@ function plugin_singlesignon_install() {
    Config::setConfigurationValues('singlesignon', $current);
 
    if (!sso_TableExists("glpi_plugin_singlesignon_providers")) {
-      $query = "CREATE TABLE `glpi_plugin_singlesignon_providers` (
+      $query = "CREATE TABLE IF NOT EXISTS `glpi_plugin_singlesignon_providers` (
                   `id`                         int(11) NOT NULL auto_increment,
                   `is_default`                 tinyint(1) NOT NULL DEFAULT '0',
                   `popup`                      tinyint(1) NOT NULL DEFAULT '0',
@@ -261,7 +261,7 @@ function plugin_singlesignon_install() {
       $query = "SHOW COLUMNS FROM glpi_plugin_singlesignon_providers LIKE 'authorized_domains'";
       $result = $DB->query($query) or die($DB->error());
       if ($DB->numrows($result) != 1) {
-         $DB->query("ALTER TABLE glpi_plugin_singlesignon_providers ADD authorized_domains varchar(255) COLLATE utf8_unicode_ci NULL") or die($DB->error());
+         $DB->query("ALTER TABLE glpi_plugin_singlesignon_providers ADD COLUMN IF NOT EXISTS authorized_domains varchar(255) COLLATE utf8_unicode_ci NULL") or die($DB->error());
       }
    }
 
@@ -286,7 +286,7 @@ function plugin_singlesignon_install() {
       $DB->query($query) or die("error adding picture column " . $DB->error());
    }
    if (version_compare($currentVersion, "1.3.0", '<')) {
-      $query = "CREATE TABLE `glpi_plugin_singlesignon_providers_users` (
+      $query = "CREATE TABLE IF NOT EXISTS `glpi_plugin_singlesignon_providers_users` (
          `id` int(11) NOT NULL AUTO_INCREMENT,
          `plugin_singlesignon_providers_id` int(11) NOT NULL DEFAULT '0',
          `users_id` int(11) NOT NULL DEFAULT '0',
