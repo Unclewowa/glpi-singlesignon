@@ -2,6 +2,7 @@
 This fork of singlesignon contains a couple of changes for my own usecase. DO NOT USE!
  * Added a couple of "IF NOT EXISTS" to the DDL clauses, as Amazon managed RDS was crasing. This was introduced in MySQL 8, thus making this fork incompatible with older versions.
  * Modified the getCallbackUrl() function found in toolbox.class.php, so it always return $url."1". Had to do this fugly change as sso stopped working with glpi 10.0.11 / php 8.1 and needed a quick fix. I'll take a look at the issue when I have some time.
+ * Modified the setup.php file so it automatically creates a folder for storing uploads, so it doesn't crash when uploading images to providers.
 
 # Single Sign-On for GLPI
 
