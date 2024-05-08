@@ -34,14 +34,6 @@ if ($folder !== "singlesignon") {
    Session::addMessageAfterRedirect($msg, true, ERROR);
 }
 
-// Create folder in files/_plugins
-if (!defined("SINGLESIGNON_DOC_DIR")) {
-    define("SINGLESIGNON_DOC_DIR", GLPI_PLUGIN_DOC_DIR . "/singlesignon");
-    if (!file_exists(SINGLESIGNON_DOC_DIR)) {
-        mkdir(SINGLESIGNON_DOC_DIR);
-    }
-}
-
 // Init the hooks of the plugins -Needed
 function plugin_init_singlesignon() {
    global $PLUGIN_HOOKS, $CFG_GLPI, $CFG_SSO;

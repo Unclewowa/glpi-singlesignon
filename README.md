@@ -1,9 +1,3 @@
-# Changes
-This fork of singlesignon contains a couple of changes for my own usecase. DO NOT USE!
- * Added a couple of "IF NOT EXISTS" to the DDL clauses, as Amazon managed RDS was crasing. This was introduced in MySQL 8, thus making this fork incompatible with older versions.
- * Modified the getCallbackUrl() function found in toolbox.class.php, so it always return $url."1". Had to do this fugly change as sso stopped working with glpi 10.0.11 / php 8.1 and needed a quick fix. I'll take a look at the issue when I have some time.
- * Modified the setup.php file so it automatically creates a folder for storing uploads, so it doesn't crash when uploading images to providers.
-
 # Single Sign-On for GLPI
 
 ![Lint](https://github.com/edgardmessias/glpi-singlesignon/workflows/Lint/badge.svg)
@@ -30,6 +24,19 @@ Single sign-on (SSO) is a property of access control of multiple related, yet in
  * Instagram - https://www.instagram.com/developer/authentication/
  * LinkedIn - https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/context
  * Generic - Allow to define custom URLs
+ * Zitadel - use _Generic_ and see parameters in [Generic Examples - Zitadel](generic_examples/zitadel.md)
+
+# Adding translations
+If your preferred language is missing. You can add your own translation with the following steps:
+ * Go to the plugin folder
+ * Switch to the folder locales
+ * Copy one of the already existing .po files
+ * Rename it into the correct notation of your language
+ * Edit the file, edit msgstr to change the translation, do not touch the msgid
+ * Edit the header especially the "Language: "
+ * When the file is ready, then you need to compile it with: msgfmt -o filename.mo filename.po
+ * If msgfmt is not found, install the package gettext (apt install -y gettext)
+ * If you edit a previous translation, you may need to update the translation cache: go to Setup - General - Performance, enable Debug mode, clear translation cache
 
 # Screenshots
 
